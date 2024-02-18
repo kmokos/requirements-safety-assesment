@@ -15,7 +15,7 @@ The concrete research contributions of this work are:
 (iv) an application of our model-based safety analysis to a set of requirements for an industrial-scale star tracker system
 
 
-The application is available inside the Tool folder. To run the JAR file, you must install the Java JDK or JRE on your computer.
+The application is available inside the Tool folder. To run the JAR file, you must install the Java JDK 8 or JRE on your computer.
 
 To run the JAR file, use the folowing syntax:
 
