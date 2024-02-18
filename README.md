@@ -1,4 +1,4 @@
-# requirements-safety-assesment
+# Model-based Safety Analysis of Requirement Specifications
 
 This work introduces a semi-automated approach for the generation of a formal model from a requirements specification.
 
