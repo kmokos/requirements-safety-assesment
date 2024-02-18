@@ -6,7 +6,7 @@ In essence, we diminish the cost of model-based design by generating a model ske
 
 The concrete research contributions of this work are:
 
-(i) an extension of our ontology-based boilerplate language*, for the specification of FDIR requirements
+(i) an extension of our ontology-based boilerplate language, for the specification of FDIR requirements
 
 (ii) the model-based representation of system requirements, for the analysis of system safety, including (a) a visualization of the specification and (b) the automated generation of a model skeleton
 
@@ -21,6 +21,6 @@ To run the JAR file, use the folowing syntax:
 
 java -jar ReqDoSA-1.0.jar
 
-Inside the Model folders the requirements together the supporting DSO exist. While in the Model folder, you can find the final version of the SLIM model used in Compass toolset.
+Inside the Model folders the Star Stracker requirements (model.mydsl) together with the supporting domain-specific ontology (model.xmi) exist. While in the Model folder, you can find the final version of the SLIM model used in Compass toolset.
 
 More on the approach can be found in https://depend.csd.auth.gr/software/requirements-safety-assessment
