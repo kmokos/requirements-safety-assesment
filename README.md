@@ -21,6 +21,6 @@ To run the JAR file, use the folowing syntax:
 
 java -jar ReqDoSA-1.0.jar
 
-Inside the Model folders the Star Tracker requirements (model.mydsl) together with the supporting domain-specific ontology (model.xmi) exist. While in the Model folder, you can find the final version of the SLIM model used in Compass toolset (https://www.compass-toolset.org/).
+Inside the Model folders the Star Tracker requirements (model.mydsl) together with the supporting domain-specific ontology (model.xmi) exist. While in the Model folder, you can find the final (edited) version of the SLIM model used in Compass toolset (https://www.compass-toolset.org/).
 
 More on the approach can be found in https://depend.csd.auth.gr/software/requirements-safety-assessment
