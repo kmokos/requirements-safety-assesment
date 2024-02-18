@@ -1,4 +1,4 @@
-# Model-based Safety Analysis of Requirement Specifications
+# Tool for visualizing requirements and generating model skeleton
 
 This work introduces a semi-automated approach for the generation of a formal model from a requirements specification.
 
