@@ -6,8 +6,11 @@ In essence, we diminish the cost of model-based design by generating a model ske
 
 The concrete research contributions of this work are:
 (i) an extension of our ontology-based boilerplate language*, for the specification of FDIR requirements
+
 (ii) the model-based representation of system requirements, for the analysis of system safety, including (a) a visualization of the specification and (b) the automated generation of a model skeleton
+
 (iii) a technical approach for (a) the safety analysis of a system design given by a model skeleton and (b) the traceability of safety violations to the requirements through their visual representation from (ii)
+
 (iv) an application of our model-based safety analysis to a set of requirements for an industrial-scale star tracker system
 
 The application is available inside the Tool folder. To run the JAR file, you must install the Java JDK or JRE on your computer.
