@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rdo_instances:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdo_instances="http://www.example.org/rdo_instances">
+  <classes xsi:type="rdo_instances:System" name="ADAS" instances="adas"/>
+  <classes xsi:type="rdo_instances:System" name="ECU" description="" instances="ecu"/>
+  <classes xsi:type="rdo_instances:System" name="Software" description="Refers to a collection of modules, instructions and data that manage computer hardware behaviour, as to provide basic functionalities that are required by users, or for other software to run properly, if at all.&#xD;&#xA;&#xD;&#xA;Abreviation: SW" instances="BSW"/>
+  <classes xsi:type="rdo_instances:State" name="NominalState" description="" instances="software_mode"/>
+  <classes xsi:type="rdo_instances:StateSet" name="LiteralStateSet" description="" instances="software_mode_stateSet SC_interface_stateSet"/>
+  <classes xsi:type="rdo_instances:StateValue" name="LiteralStateValue" description="" instances="BM SBM PM AAM ATM nominal_SC_interface redudant_SC_interface"/>
+  <classes xsi:type="rdo_instances:System" name="SystemConceptualizingEnvironment" description="" instances="CPU SRAM spacecraft"/>
+  <classes xsi:type="rdo_instances:Function" name="CPUAction" description="" instances="start_execute_BSW_image cpu_reset" subClassesOpposite="Function"/>
+  <classes xsi:type="rdo_instances:Function" name="Function" description="A Function is an operation or activity performed by a System. Every Function is a SpecifiedConcept, which implies that a Requirement can specify a Function. Functions, therefore, represent intended System behavior (e.x. send instrument telemetry packet). Functions may emit or ingest Flows representing non-discrete exchanges of matter or energy. Functions may send or receive Items representing discrete exchanges of matter or information." subClasses="CPUAction"/>
+  <classes xsi:type="rdo_instances:System" name="StarTracker" description="A star tracker is an optical device that measures the positions of stars using photocells or a camera. As the positions of many stars have been measured by astronomers to a high degree of accuracy, a star tracker on a satellite or spacecraft may be used to determine the orientation (or attitude) of the spacecraft with respect to the stars. In order to do this, the star tracker must obtain an image of the stars, measure their apparent position in the reference frame of the spacecraft, and identify the stars so their position can be compared with their known absolute position from a star catalog. A star tracker may include a processor to identify stars by comparing the pattern of observed stars with the known pattern of stars in the sky. " instances="starTracker"/>
+  <classes xsi:type="rdo_instances:Function" name="StarTrackerAction" description="Star tracker functionality" instances="power_on"/>
+  <classes xsi:type="rdo_instances:Function" name="SoftwareAction" description="Software functionality" instances="enter_BM power_off_both_Ohs copy_ASW_image_in_NVM_to_RAM set_boot_report signal_BSW_available_for_commanding autonomous_mode_transition_to_configuration_mode commanded_mode_transition_to_configuration_mode power_on_NVM accept_pus_service_requests generate_pus_service_reports start_pus_service_request_execution send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report send_1_pus_TM_1_3_successful_start_of_execution_verification_report execute_pus_service_request send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report dump_contents_of_any_readable_part_of_memory update_any_writeable_part_of_memory copy_NVM_sector_contents_to_RAM_scratchpad_area discard_RAM_scratchpad_area calculate_checksum_of_the_contents_of_any_readable_part_of_memory power_off_NVM generate_pus_TM_3_25_housekeeping_parameter_report refresh_hardware_watchdog write_information_regarding_the_unrecoverable_error_occurrence_into_memory scrub_any_memory_words_for_which_the_HW_detects_a_correctable_memory_error"/>
+  <classes xsi:type="rdo_instances:Item" name="SoftwareData" description="Software data" instances="Boot_Report stay_in_BM_flag stay_in_BM_command pus_service_requests mode_transition_command mode_transition_command_to_BM mode_transition_command_to_configuration_mode NVM_power_status pus_service_reports pus_TM_1_2_Failed_Acceptance_Verification_Report pus_TM_1_3_successful_start_of_execution_verification_report pus_TM_1_4_Failed_Start_of_Execution_Verification_Report pus_TM_1_7_successful_completion_of_execution_verification_report pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report pus_TC_6_5_dump_raw_memory_area_service_request pus_TC_6_2_load_raw_memory_data_area_service_request pus_TM_6_6_dumped_raw_memory_data_report pus_TC_open_NVM_sector_for_writing_service_request pus_TC_close_NVM_sector_service_request pus_TC_6_9_check_raw_memory_data_service_request pus_6_10_checked_raw_memory_data_report EU_HK_data five_V0_voltage three_V3_voltage one_V8_voltage EU_thermistor OH1_current OH2_current OH1_additional_thermistor OH2_additional_thermistor SW_HK_data BSW_version_ID pus_TM_3_25_housekeeping_parameter_report_with_dedicated_SID pus_TM_3_25_housekeeping_parameter_report mission_specific_pus_housekeeping_parameter_service_request cease_refresh_hardware_watchdog number_of_memory_cells_with_correctable_errors_HK_data last_interface_used ASW_image"/>
+  <classes xsi:type="rdo_instances:Flow" name="Event" description="" instances="BSW_commanding_availability_signal access_NVM_signal"/>
+  <classes xsi:type="rdo_instances:Interface" name="SoftwareInterface" description="" instances="spacecraft_interface nominal_spacecraft_interface redundant_spacecraft_interface"/>
+  <classes xsi:type="rdo_instances:Error" name="SoftwareError" description="" instances="failed_acceptance failed_start failed_execution"/>
+  <classes xsi:type="rdo_instances:Error" name="HardwareError" description="" instances="uncorrectable_EDAC_error correctable_EDAC_error"/>
+  <classes xsi:type="rdo_instances:Fault" name="HardwareFault" description="" instances="uncorrectable_memory_error" subClassesOpposite="Fault"/>
+  <classes xsi:type="rdo_instances:Failure" name="Propagation" description="" instances="uncorrectable_EDAC_error_failure correctable_EDAC_error_failure"/>
+  <classes xsi:type="rdo_instances:Flow" name="Interrupt" description="" instances="ceasing_watchdog_refresh_interrupt"/>
+  <classes xsi:type="rdo_instances:Connection" name="PointToPoint" description="" instances="spacewire UART"/>
+  <classes xsi:type="rdo_instances:Fault" name="Fault" description="Fault is the state of a system characterized by inability to perform a required function&#xD;&#xA;While a failure is an event that occurs at a specific point in time, a fault is a state that will last for a shorter or longer period.&#xD;&#xA;When a failure occurs, the item enters the failed state. A failure may occur:&#xD;&#xA;- While running&#xD;&#xA;- While in standby&#xD;&#xA;- Due to demand" subClasses="HardwareFault"/>
+  <instances name="BSW" description="" instanceOpposite="Software"/>
+  <instances name="software_mode" description="" instanceOpposite="NominalState"/>
+  <instances name="software_mode_stateSet" description="" instanceOpposite="LiteralStateSet"/>
+  <instances name="BM" description="" instanceOpposite="LiteralStateValue"/>
+  <instances name="SBM" description="" instanceOpposite="LiteralStateValue"/>
+  <instances name="PM" description="" instanceOpposite="LiteralStateValue"/>
+  <instances name="AAM" description="" instanceOpposite="LiteralStateValue"/>
+  <instances name="ATM" description="" instanceOpposite="LiteralStateValue"/>
+  <instances name="CPU" description="" instanceOpposite="SystemConceptualizingEnvironment"/>
+  <instances name="start_execute_BSW_image" description="" instanceOpposite="CPUAction"/>
+  <instances name="starTracker" description="" instanceOpposite="StarTracker"/>
+  <instances name="power_on" description="" instanceOpposite="StarTrackerAction"/>
+  <instances name="enter_BM" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="power_off_both_Ohs" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="copy_ASW_image_in_NVM_to_RAM" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="set_boot_report" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="Boot_Report" description="" instanceOpposite="SoftwareData"/>
+  <instances name="signal_BSW_available_for_commanding" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="BSW_commanding_availability_signal" description="" instanceOpposite="Event"/>
+  <instances name="stay_in_BM_flag" description="" instanceOpposite="SoftwareData"/>
+  <instances name="autonomous_mode_transition_to_configuration_mode" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="stay_in_BM_command" description="" instanceOpposite="SoftwareData"/>
+  <instances name="pus_service_requests" description="" instanceOpposite="SoftwareData"/>
+  <instances name="mode_transition_command" description="" instanceOpposite="SoftwareData"/>
+  <instances name="mode_transition_command_to_BM" description="" instanceOpposite="SoftwareData"/>
+  <instances name="mode_transition_command_to_configuration_mode" description="" instanceOpposite="SoftwareData"/>
+  <instances name="NVM_power_status" description="" instanceOpposite="SoftwareData"/>
+  <instances name="commanded_mode_transition_to_configuration_mode" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="power_on_NVM" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="accept_pus_service_requests" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="generate_pus_service_reports" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_service_reports" description="" instanceOpposite="SoftwareData"/>
+  <instances name="spacecraft_interface" description="" instanceOpposite="SoftwareInterface"/>
+  <instances name="start_pus_service_request_execution" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="failed_acceptance" description="" instanceOpposite="SoftwareError"/>
+  <instances name="send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_TM_1_2_Failed_Acceptance_Verification_Report" description="" instanceOpposite="SoftwareData"/>
+  <instances name="send_1_pus_TM_1_3_successful_start_of_execution_verification_report" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="failed_start" description="" instanceOpposite="SoftwareError"/>
+  <instances name="execute_pus_service_request" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_TM_1_3_successful_start_of_execution_verification_report" description="" instanceOpposite="SoftwareData"/>
+  <instances name="send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_TM_1_4_Failed_Start_of_Execution_Verification_Report" description="" instanceOpposite="SoftwareData"/>
+  <instances name="pus_TM_1_7_successful_completion_of_execution_verification_report" description="" instanceOpposite="SoftwareData"/>
+  <instances name="failed_execution" description="" instanceOpposite="SoftwareError"/>
+  <instances name="send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report" description="" instanceOpposite="SoftwareData"/>
+  <instances name="dump_contents_of_any_readable_part_of_memory" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_TC_6_5_dump_raw_memory_area_service_request" description="" instanceOpposite="SoftwareData"/>
+  <instances name="pus_TC_6_2_load_raw_memory_data_area_service_request" description="" instanceOpposite="SoftwareData"/>
+  <instances name="update_any_writeable_part_of_memory" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_TM_6_6_dumped_raw_memory_data_report" description="" instanceOpposite="SoftwareData"/>
+  <instances name="pus_TC_open_NVM_sector_for_writing_service_request" description="" instanceOpposite="SoftwareData"/>
+  <instances name="copy_NVM_sector_contents_to_RAM_scratchpad_area" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_TC_close_NVM_sector_service_request" description="" instanceOpposite="SoftwareData"/>
+  <instances name="discard_RAM_scratchpad_area" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_TC_6_9_check_raw_memory_data_service_request" description="" instanceOpposite="SoftwareData"/>
+  <instances name="calculate_checksum_of_the_contents_of_any_readable_part_of_memory" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_6_10_checked_raw_memory_data_report" description="" instanceOpposite="SoftwareData"/>
+  <instances name="access_NVM_signal" description="" instanceOpposite="Event"/>
+  <instances name="power_off_NVM" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="EU_HK_data" description="" instanceOpposite="SoftwareData"/>
+  <instances name="five_V0_voltage" description="" instanceOpposite="SoftwareData"/>
+  <instances name="three_V3_voltage" description="" instanceOpposite="SoftwareData"/>
+  <instances name="one_V8_voltage" description="" instanceOpposite="SoftwareData"/>
+  <instances name="EU_thermistor" description="" instanceOpposite="SoftwareData"/>
+  <instances name="OH1_current" description="" instanceOpposite="SoftwareData"/>
+  <instances name="OH2_current" description="" instanceOpposite="SoftwareData"/>
+  <instances name="OH1_additional_thermistor" description="" instanceOpposite="SoftwareData"/>
+  <instances name="OH2_additional_thermistor" description="" instanceOpposite="SoftwareData"/>
+  <instances name="SW_HK_data" description="" instanceOpposite="SoftwareData"/>
+  <instances name="BSW_version_ID" description="" instanceOpposite="SoftwareData"/>
+  <instances name="generate_pus_TM_3_25_housekeeping_parameter_report" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="pus_TM_3_25_housekeeping_parameter_report_with_dedicated_SID" description="" instanceOpposite="SoftwareData"/>
+  <instances name="pus_TM_3_25_housekeeping_parameter_report" description="" instanceOpposite="SoftwareData"/>
+  <instances name="mission_specific_pus_housekeeping_parameter_service_request" description="" instanceOpposite="SoftwareData"/>
+  <instances name="refresh_hardware_watchdog" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="SRAM" description="" instanceOpposite="SystemConceptualizingEnvironment"/>
+  <instances name="uncorrectable_EDAC_error" description="" instanceOpposite="HardwareError"/>
+  <instances name="uncorrectable_EDAC_error_failure" description="" instanceOpposite="Propagation"/>
+  <instances name="ceasing_watchdog_refresh_interrupt" description="" instanceOpposite="Interrupt"/>
+  <instances name="cease_refresh_hardware_watchdog" description="" instanceOpposite="SoftwareData"/>
+  <instances name="write_information_regarding_the_unrecoverable_error_occurrence_into_memory" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="correctable_EDAC_error" description="" instanceOpposite="HardwareError"/>
+  <instances name="correctable_EDAC_error_failure" description="" instanceOpposite="Propagation"/>
+  <instances name="scrub_any_memory_words_for_which_the_HW_detects_a_correctable_memory_error" description="" instanceOpposite="SoftwareAction"/>
+  <instances name="number_of_memory_cells_with_correctable_errors_HK_data" description="" instanceOpposite="SoftwareData"/>
+  <instances name="nominal_spacecraft_interface" description="" instanceOpposite="SoftwareInterface"/>
+  <instances name="redundant_spacecraft_interface" description="" instanceOpposite="SoftwareInterface"/>
+  <instances name="last_interface_used" description="" instanceOpposite="SoftwareData"/>
+  <instances name="nominal_SC_interface" description="" instanceOpposite="LiteralStateValue"/>
+  <instances name="redudant_SC_interface" description="" instanceOpposite="LiteralStateValue"/>
+  <instances name="SC_interface_stateSet" description="" instanceOpposite="LiteralStateSet"/>
+  <instances name="spacewire" description="" instanceOpposite="PointToPoint"/>
+  <instances name="UART" description="" instanceOpposite="PointToPoint"/>
+  <instances name="ASW_image" description="" instanceOpposite="SoftwareData"/>
+  <instances name="adas" instanceOpposite="ADAS"/>
+  <instances name="ecu" description="" instanceOpposite="ECU"/>
+  <instances name="spacecraft" description="" instanceOpposite="SystemConceptualizingEnvironment"/>
+  <instances name="cpu_reset" description="" instanceOpposite="CPUAction"/>
+  <instances name="uncorrectable_memory_error" description="sds" instanceOpposite="HardwareFault"/>
+</rdo_instances:Model>

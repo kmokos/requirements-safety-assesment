@@ -1,0 +1,344 @@
+system SRAM
+features
+    correctable_EDAC_error_failure: out data port bool { Default => "false";
+            Alarm => true;
+     };
+    emits_uncorrectable_EDAC_error_failure: out event port ;
+    uncorrectable_EDAC_error_failure: out data port bool { Default => "false";
+     };
+    function_state: out data port enum(no_function_sram_st, emits_uncorrectable_EDAC_error_failure_sram_st, emits_correctable_EDAC_error_failure_sram_st);
+    emits_correctable_EDAC_error_failure: out event port ;
+properties
+    FDIR => true;
+end SRAM;
+
+system spacecraft
+features
+    function_state: out data port enum(no_function_spacecraft_st);
+end spacecraft;
+
+system BSW
+features
+    correctable_EDAC_error_failure: in data port bool;
+    receive_mode_transition_command_to_BM: out event port ;
+    set_boot_report: out event port ;
+    send_1_pus_TM_1_3_successful_start_of_execution_verification_report: out event port ;
+    pus_TM_3_25_housekeeping_parameter_report_with_dedicated_SID: out data port bool { Default => "false";
+     };
+    calculate_checksum_of_the_contents_of_any_readable_part_of_memory: out event port ;
+    pus_TC_6_5_dump_raw_memory_area_service_request: in data port bool;
+    receive_mission_specific_pus_housekeeping_parameter_service_request: out event port ;
+    receive_stay_in_BM_command: out event port ;
+    generate_pus_service_reports: out event port ;
+    power_off_both_Ohs: out event port ;
+    send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report: out event port ;
+    receive_pus_TC_6_5_dump_raw_memory_area_service_request: out event port ;
+    EU_HK_data: out data port bool { Default => "false";
+     };
+    execute_pus_service_request: out event port ;
+    receive_pus_TC_open_NVM_sector_for_writing_service_request: out event port ;
+    ingest_correctable_EDAC_error_failure: out event port ;
+    send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report: out event port ;
+    dump_contents_of_any_readable_part_of_memory: out event port ;
+    update_any_writeable_part_of_memory: out event port ;
+    number_of_memory_cells_with_correctable_errors_HK_data: out data port bool { Default => "false";
+     };
+    access_NVM_signal: out data port bool { Default => "false";
+     };
+    receive_mode_transition_command: out event port ;
+    pus_service_reports: out data port enum(pus_6_10_checked_raw_memory_data_report_enum, no_pus_6_10_checked_raw_memory_data_report_enum, pus_TM_6_6_dumped_raw_memory_data_report_enum, no_pus_TM_6_6_dumped_raw_memory_data_report_enum, pus_TM_1_3_successful_start_of_execution_verification_report_enum, no_pus_TM_1_3_successful_start_of_execution_verification_report_enum, pus_TM_1_2_Failed_Acceptance_Verification_Report_enum, no_pus_TM_1_2_Failed_Acceptance_Verification_Report_enum, pus_TM_3_25_housekeeping_parameter_report_with_dedicated_SID_enum, no_pus_TM_3_25_housekeeping_parameter_report_with_dedicated_SID_enum, pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum, no_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum, pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum, no_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum);
+    mode_transition_command: in data port enum(pus_TC_open_NVM_sector_for_writing_service_request_enum, no_pus_TC_open_NVM_sector_for_writing_service_request_enum, pus_TC_6_9_check_raw_memory_data_service_request_enum, no_pus_TC_6_9_check_raw_memory_data_service_request_enum, stay_in_BM_command_enum, no_stay_in_BM_command_enum, pus_TC_close_NVM_sector_service_request_enum, no_pus_TC_close_NVM_sector_service_request_enum, mode_transition_command_to_configuration_mode_enum, no_mode_transition_command_to_configuration_mode_enum, mission_specific_pus_housekeeping_parameter_service_request_enum, no_mission_specific_pus_housekeeping_parameter_service_request_enum, pus_TC_6_5_dump_raw_memory_area_service_request_enum, no_pus_TC_6_5_dump_raw_memory_area_service_request_enum, pus_TC_6_2_load_raw_memory_data_area_service_request_enum, no_pus_TC_6_2_load_raw_memory_data_area_service_request_enum, mode_transition_command_to_BM_enum, no_mode_transition_command_to_BM_enum) {Alarm => true;};
+    autonomous_mode_transition_to_configuration_mode: out event port ;
+    ASW_image: in data port bool;
+    send_pus_6_10_checked_raw_memory_data_report: out event port ;
+    send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report: out event port ;
+    send_pus_TM_6_6_dumped_raw_memory_data_report: out event port ;
+    NVM_power_status: out data port bool { Default => "false";
+     };
+    set_last_interface_used: out event port ;
+    set_number_of_memory_cells_with_correctable_errors_HK_data: out event port ;
+    ceasing_watchdog_refresh_interrupt: out data port bool { Default => "false";
+     };
+    pus_TC_close_NVM_sector_service_request: in data port bool;
+    copy_ASW_image_in_NVM_to_RAM: out event port ;
+    stay_in_BM_command: in data port bool;
+    set_stay_in_BM_flag: out event port ;
+    pus_service_requests: in data port enum(pus_TC_open_NVM_sector_for_writing_service_request_enum, no_pus_TC_open_NVM_sector_for_writing_service_request_enum, pus_TC_6_9_check_raw_memory_data_service_request_enum, no_pus_TC_6_9_check_raw_memory_data_service_request_enum, stay_in_BM_command_enum, no_stay_in_BM_command_enum, pus_TC_close_NVM_sector_service_request_enum, no_pus_TC_close_NVM_sector_service_request_enum, mode_transition_command_to_configuration_mode_enum, no_mode_transition_command_to_configuration_mode_enum, mission_specific_pus_housekeeping_parameter_service_request_enum, no_mission_specific_pus_housekeeping_parameter_service_request_enum, pus_TC_6_5_dump_raw_memory_area_service_request_enum, no_pus_TC_6_5_dump_raw_memory_area_service_request_enum, pus_TC_6_2_load_raw_memory_data_area_service_request_enum, no_pus_TC_6_2_load_raw_memory_data_area_service_request_enum, mode_transition_command_to_BM_enum, no_mode_transition_command_to_BM_enum);
+    copy_NVM_sector_contents_to_RAM_scratchpad_area: out event port ;
+    scrub_any_memory_words_for_which_the_HW_detects_a_correctable_memory_error: out event port ;
+    send_pus_TM_1_7_successful_completion_of_execution_verification_report: out event port ;
+    pus_TM_1_7_successful_completion_of_execution_verification_report: out data port bool { Default => "false";
+     };
+    receive_pus_TC_6_9_check_raw_memory_data_service_request: out event port ;
+    pus_TM_1_2_Failed_Acceptance_Verification_Report: out data port bool { Default => "false";
+            Alarm => true;
+     };
+    pus_TM_3_25_housekeeping_parameter_report: out data port enum(pus_6_10_checked_raw_memory_data_report_enum, no_pus_6_10_checked_raw_memory_data_report_enum, pus_TM_6_6_dumped_raw_memory_data_report_enum, no_pus_TM_6_6_dumped_raw_memory_data_report_enum, pus_TM_1_3_successful_start_of_execution_verification_report_enum, no_pus_TM_1_3_successful_start_of_execution_verification_report_enum, pus_TM_1_2_Failed_Acceptance_Verification_Report_enum, no_pus_TM_1_2_Failed_Acceptance_Verification_Report_enum, pus_TM_3_25_housekeeping_parameter_report_with_dedicated_SID_enum, no_pus_TM_3_25_housekeeping_parameter_report_with_dedicated_SID_enum, pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum, no_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum, pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum, no_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum);
+    refresh_hardware_watchdog: out event port ;
+    power_off_NVM: out event port ;
+    pus_TC_6_2_load_raw_memory_data_area_service_request: in data port bool;
+    SW_HK_data: out data port bool { Default => "false";
+     };
+    set_cease_refresh_hardware_watchdog: out event port ;
+    set_cease_refresh_hardware_watchdog_in: in event port ;
+    stay_in_BM_flag: out data port bool { Default => "false";
+     };
+    enter_BM_in: in event port ;
+    enter_BM: out event port ;
+    mission_specific_pus_housekeeping_parameter_service_request: in data port bool;
+    set_SW_HK_data: out event port ;
+    power_on_NVM: out event port ;
+    emit_access_NVM_signal: out event port ;
+    last_interface_used: out data port enum(redudant_SC_interface, nominal_SC_interface);
+    pus_TM_1_4_Failed_Start_of_Execution_Verification_Report: out data port bool { Default => "false";
+            Alarm => true;
+            Alarm => true;
+     };
+    pus_TC_6_9_check_raw_memory_data_service_request: in data port bool;
+    pus_TM_1_3_successful_start_of_execution_verification_report: out data port bool { Default => "false";
+     };
+    accept_pus_service_requests: out event port ;
+    mode_transition_command_to_BM: in data port bool;
+    pus_TM_6_6_dumped_raw_memory_data_report: out data port bool { Default => "false";
+     };
+    emit_ceasing_watchdog_refresh_interrupt: out event port ;
+    Boot_Report: out data port bool { Default => "false";
+     };
+    receive_mode_transition_command_to_configuration_mode: out event port ;
+    pre_failed_state: out data port enum(BM_bsw_st, SBM_bsw_st);
+    mode_transition_command_to_configuration_mode: in data port bool;
+    receive_pus_TC_close_NVM_sector_service_request: out event port ;
+    start_pus_service_request_execution: out event port ;
+    function_state: out data port enum(no_function_bsw_st, set_boot_report_bsw_st, signal_BSW_available_for_commanding_bsw_st, set_stay_in_BM_flag_bsw_st, generate_pus_service_reports_bsw_st, power_off_both_Ohs_bsw_st, receive_pus_TC_open_NVM_sector_for_writing_service_request_bsw_st, copy_NVM_sector_contents_to_RAM_scratchpad_area_bsw_st, update_any_writeable_part_of_memory_bsw_st, send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_bsw_st, receive_pus_TC_6_2_load_raw_memory_data_area_service_request_bsw_st, execute_pus_service_request_bsw_st, copy_ASW_image_in_NVM_to_RAM_bsw_st, discard_RAM_scratchpad_area_bsw_st, receive_mission_specific_pus_housekeeping_parameter_service_request_bsw_st, receive_pus_TC_close_NVM_sector_service_request_bsw_st, set_SW_HK_data_bsw_st, receive_mode_transition_command_to_BM_bsw_st, receive_stay_in_BM_command_bsw_st, autonomous_mode_transition_to_configuration_mode_bsw_st, receive_pus_TC_6_9_check_raw_memory_data_service_request_bsw_st, send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_bsw_st, send_pus_6_10_checked_raw_memory_data_report_bsw_st, refresh_hardware_watchdog_bsw_st, ingest_correctable_EDAC_error_failure_bsw_st, set_EU_HK_data_bsw_st, start_pus_service_request_execution_bsw_st, power_off_NVM_bsw_st, send_1_pus_TM_1_3_successful_start_of_execution_verification_report_bsw_st, generate_pus_TM_3_25_housekeeping_parameter_report_bsw_st, accept_pus_service_requests_bsw_st, send_pus_TM_6_6_dumped_raw_memory_data_report_bsw_st, receive_mode_transition_command_bsw_st, dump_contents_of_any_readable_part_of_memory_bsw_st, receive_mode_transition_command_to_configuration_mode_bsw_st, power_on_NVM_bsw_st, send_pus_TM_1_7_successful_completion_of_execution_verification_report_bsw_st, set_number_of_memory_cells_with_correctable_errors_HK_data_bsw_st, receive_pus_TC_6_5_dump_raw_memory_area_service_request_bsw_st, calculate_checksum_of_the_contents_of_any_readable_part_of_memory_bsw_st, emit_ceasing_watchdog_refresh_interrupt_bsw_st, send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report_bsw_st, enter_BM_bsw_st, send_pus_TM_3_25_housekeeping_parameter_report_bsw_st, write_information_regarding_the_unrecoverable_error_occurrence_into_memory_bsw_st, emit_access_NVM_signal_bsw_st, set_cease_refresh_hardware_watchdog_bsw_st, set_last_interface_used_bsw_st, scrub_any_memory_words_for_which_the_HW_detects_a_correctable_memory_error_bsw_st, ingest_uncorrectable_EDAC_error_failure_bsw_st);
+    signal_BSW_available_for_commanding: out event port ;
+    pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report: out data port bool { Default => "false";
+            Alarm => true;
+     };
+    write_information_regarding_the_unrecoverable_error_occurrence_into_memory: out event port ;
+    pus_6_10_checked_raw_memory_data_report: out data port bool { Default => "false";
+     };
+    receive_pus_TC_6_2_load_raw_memory_data_area_service_request: out event port ;
+    send_pus_TM_3_25_housekeeping_parameter_report: out event port ;
+    cease_refresh_hardware_watchdog: out data port bool { Default => "false";
+     };
+    set_EU_HK_data: out event port ;
+    uncorrectable_EDAC_error_failure: in data port bool;
+    ingest_uncorrectable_EDAC_error_failure: out event port ;
+    generate_pus_TM_3_25_housekeeping_parameter_report: out event port ;
+    discard_RAM_scratchpad_area: out event port ;
+    pus_TC_open_NVM_sector_for_writing_service_request: in data port bool;
+properties
+    FDIR => true;
+    Patterns => ([ Name => "error is alerted"; Pattern => "After {pus_service_reports = pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum}, {pus_TM_1_4_Failed_Start_of_Execution_Verification_Report} holds eventually "; ]);
+end BSW;
+
+system CPU
+features
+    ceasing_watchdog_refresh_interrupt: in data port bool;
+    ingest_ceasing_watchdog_refresh_interrupt: out event port ;
+    cpu_reset: out event port ;
+    start_execute_BSW_image: out event port ;
+    function_state: out data port enum(no_function_cpu_st, ingest_ceasing_watchdog_refresh_interrupt_cpu_st, start_execute_BSW_image_cpu_st, cpu_reset_cpu_st);
+end CPU;
+
+system starTracker
+features
+    pus_TM_1_2_Failed_Acceptance_Verification_Report: out data port bool { Default => "false";
+            Observable => true;
+     };
+    function_state: out data port enum(no_function_startracker_st);
+    pus_TM_1_4_Failed_Start_of_Execution_Verification_Report: out data port bool { Default => "false";
+            Observable => true;
+     };
+    pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report: out data port bool { Default => "false";
+            Observable => true;
+     };
+properties
+    GenericProperties => ([ Name => "Observe pus_TM_1_2_Failed_Acceptance_Verification_Report"; Formula => "pus_TM_1_2_Failed_Acceptance_Verification_Report"; ],[ Name => "Observe pus_TM_1_4_Failed_Start_of_Execution_Verification_Report"; Formula => "pus_TM_1_4_Failed_Start_of_Execution_Verification_Report"; ],[ Name => "Observe pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report"; Formula => "pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report"; ]);
+end starTracker;
+
+system implementation BSW.Impl
+states
+    BM : initial state;
+    SBM : state;
+    failed : state;
+transitions
+    BM -[set_boot_report when function_state = copy_ASW_image_in_NVM_to_RAM_bsw_st then Boot_Report := true; function_state := set_boot_report_bsw_st]-> BM;
+    failed -[send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report when pus_service_reports = pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum and function_state = execute_pus_service_request_bsw_st then pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report := true; function_state := send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_bsw_st]-> failed;
+    SBM -[execute_pus_service_request when function_state = start_pus_service_request_execution_bsw_st then function_state := execute_pus_service_request_bsw_st]-> SBM;
+    BM -[accept_pus_service_requests when pus_service_reports = pus_TM_1_2_Failed_Acceptance_Verification_Report_enum then pre_failed_state := BM_bsw_st; function_state := accept_pus_service_requests_bsw_st]-> failed;
+    SBM -[send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report when pus_service_reports != pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum and function_state = execute_pus_service_request_bsw_st then pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report := true; function_state := send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_bsw_st]-> SBM;
+    SBM -[update_any_writeable_part_of_memory when function_state = receive_pus_TC_6_2_load_raw_memory_data_area_service_request_bsw_st then function_state := update_any_writeable_part_of_memory_bsw_st]-> SBM;
+    BM -[receive_stay_in_BM_command then function_state := receive_stay_in_BM_command_bsw_st]-> BM;
+    BM -[refresh_hardware_watchdog then function_state := refresh_hardware_watchdog_bsw_st]-> BM;
+    SBM -[generate_pus_service_reports then function_state := generate_pus_service_reports_bsw_st]-> SBM;
+    SBM -[signal_BSW_available_for_commanding when function_state = copy_ASW_image_in_NVM_to_RAM_bsw_st then function_state := signal_BSW_available_for_commanding_bsw_st]-> SBM;
+    SBM -[accept_pus_service_requests when pus_service_reports = pus_TM_1_2_Failed_Acceptance_Verification_Report_enum then pre_failed_state := SBM_bsw_st; function_state := accept_pus_service_requests_bsw_st]-> failed;
+    SBM -[execute_pus_service_request when pus_service_reports = pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum and function_state = start_pus_service_request_execution_bsw_st then pre_failed_state := SBM_bsw_st; function_state := execute_pus_service_request_bsw_st]-> failed;
+    failed -[reset when pus_service_reports = pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum and function_state = send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_bsw_st and pre_failed_state = BM_bsw_st then pus_service_reports := no_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum]-> BM;
+    failed -[reset when pus_service_reports = pus_TM_1_2_Failed_Acceptance_Verification_Report_enum and function_state = send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report_bsw_st and pre_failed_state = BM_bsw_st then pus_service_reports := no_pus_TM_1_2_Failed_Acceptance_Verification_Report_enum]-> BM;
+    failed -[reset when pus_service_reports = pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum and function_state = send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_bsw_st and pre_failed_state = BM_bsw_st then pus_service_reports := no_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum]-> BM;
+    failed -[reset when pus_service_reports = pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum and function_state = send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_bsw_st and pre_failed_state = SBM_bsw_st then pus_service_reports := no_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum]-> SBM;
+    failed -[reset when pus_service_reports = pus_TM_1_2_Failed_Acceptance_Verification_Report_enum and function_state = send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report_bsw_st and pre_failed_state = SBM_bsw_st then pus_service_reports := no_pus_TM_1_2_Failed_Acceptance_Verification_Report_enum]-> SBM;
+    BM -[receive_mode_transition_command_to_BM then function_state := receive_mode_transition_command_to_BM_bsw_st]-> BM;
+    BM -[discard_RAM_scratchpad_area when function_state = receive_pus_TC_close_NVM_sector_service_request_bsw_st then function_state := discard_RAM_scratchpad_area_bsw_st]-> BM;
+    BM -[send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report when pus_service_reports != pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum and (function_state = receive_pus_TC_6_5_dump_raw_memory_area_service_request_bsw_st or function_state = dump_contents_of_any_readable_part_of_memory_bsw_st or function_state = start_pus_service_request_execution_bsw_st) then pus_TM_1_4_Failed_Start_of_Execution_Verification_Report := true; function_state := send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_bsw_st]-> BM;
+    SBM -[copy_NVM_sector_contents_to_RAM_scratchpad_area when function_state = receive_pus_TC_open_NVM_sector_for_writing_service_request_bsw_st then function_state := copy_NVM_sector_contents_to_RAM_scratchpad_area_bsw_st]-> SBM;
+    SBM -[power_off_both_Ohs then function_state := power_off_both_Ohs_bsw_st]-> SBM;
+    BM -[send_pus_6_10_checked_raw_memory_data_report when function_state = calculate_checksum_of_the_contents_of_any_readable_part_of_memory_bsw_st then pus_6_10_checked_raw_memory_data_report := true; function_state := send_pus_6_10_checked_raw_memory_data_report_bsw_st]-> BM;
+    BM -[start_pus_service_request_execution when function_state = accept_pus_service_requests_bsw_st then function_state := start_pus_service_request_execution_bsw_st]-> BM;
+    BM -[ingest_correctable_EDAC_error_failure then function_state := ingest_correctable_EDAC_error_failure_bsw_st]-> BM;
+    BM -[send_1_pus_TM_1_3_successful_start_of_execution_verification_report when function_state = start_pus_service_request_execution_bsw_st then pus_TM_1_3_successful_start_of_execution_verification_report := true; function_state := send_1_pus_TM_1_3_successful_start_of_execution_verification_report_bsw_st]-> BM;
+    BM -[power_off_NVM then NVM_power_status := false; function_state := power_off_NVM_bsw_st]-> BM;
+    SBM -[discard_RAM_scratchpad_area when function_state = receive_pus_TC_close_NVM_sector_service_request_bsw_st then function_state := discard_RAM_scratchpad_area_bsw_st]-> SBM;
+    SBM -[copy_ASW_image_in_NVM_to_RAM then function_state := copy_ASW_image_in_NVM_to_RAM_bsw_st]-> SBM;
+    BM -[execute_pus_service_request when pus_service_reports = pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum and function_state = start_pus_service_request_execution_bsw_st then pre_failed_state := BM_bsw_st; function_state := execute_pus_service_request_bsw_st]-> failed;
+    SBM -[enter_BM_in then function_state := enter_BM_bsw_st]-> BM;
+    BM -[start_pus_service_request_execution when pus_service_reports = pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum and function_state = accept_pus_service_requests_bsw_st then pre_failed_state := BM_bsw_st; function_state := start_pus_service_request_execution_bsw_st]-> failed;
+    BM -[signal_BSW_available_for_commanding when function_state = copy_ASW_image_in_NVM_to_RAM_bsw_st then function_state := signal_BSW_available_for_commanding_bsw_st]-> BM;
+    BM -[generate_pus_service_reports then function_state := generate_pus_service_reports_bsw_st]-> BM;
+    failed -[send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report when pus_service_reports = pus_TM_1_2_Failed_Acceptance_Verification_Report_enum and function_state = accept_pus_service_requests_bsw_st then pus_TM_1_2_Failed_Acceptance_Verification_Report := true; function_state := send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report_bsw_st]-> failed;
+    BM -[copy_NVM_sector_contents_to_RAM_scratchpad_area when function_state = receive_pus_TC_open_NVM_sector_for_writing_service_request_bsw_st then function_state := copy_NVM_sector_contents_to_RAM_scratchpad_area_bsw_st]-> BM;
+    BM -[power_off_both_Ohs then function_state := power_off_both_Ohs_bsw_st]-> BM;
+    BM -[send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report when pus_service_reports != pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum and function_state = execute_pus_service_request_bsw_st then pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report := true; function_state := send_1_pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_bsw_st]-> BM;
+    BM -[update_any_writeable_part_of_memory when function_state = receive_pus_TC_6_2_load_raw_memory_data_area_service_request_bsw_st then function_state := update_any_writeable_part_of_memory_bsw_st]-> BM;
+    BM -[copy_ASW_image_in_NVM_to_RAM then function_state := copy_ASW_image_in_NVM_to_RAM_bsw_st]-> BM;
+    BM -[execute_pus_service_request when function_state = start_pus_service_request_execution_bsw_st then function_state := execute_pus_service_request_bsw_st]-> BM;
+    SBM -[enter_BM then function_state := enter_BM_bsw_st]-> BM;
+    BM -[set_stay_in_BM_flag when function_state = receive_stay_in_BM_command_bsw_st then stay_in_BM_flag := true; function_state := set_stay_in_BM_flag_bsw_st]-> BM;
+    failed -[reset when pus_service_reports = pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum and function_state = send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_bsw_st and pre_failed_state = SBM_bsw_st then pus_service_reports := no_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum]-> SBM;
+    SBM -[send_1_pus_TM_1_3_successful_start_of_execution_verification_report when function_state = start_pus_service_request_execution_bsw_st then pus_TM_1_3_successful_start_of_execution_verification_report := true; function_state := send_1_pus_TM_1_3_successful_start_of_execution_verification_report_bsw_st]-> SBM;
+    SBM -[power_off_NVM then NVM_power_status := false; function_state := power_off_NVM_bsw_st]-> SBM;
+    SBM -[start_pus_service_request_execution when function_state = accept_pus_service_requests_bsw_st then function_state := start_pus_service_request_execution_bsw_st]-> SBM;
+    SBM -[ingest_correctable_EDAC_error_failure then function_state := ingest_correctable_EDAC_error_failure_bsw_st]-> SBM;
+    SBM -[refresh_hardware_watchdog then function_state := refresh_hardware_watchdog_bsw_st]-> SBM;
+    SBM -[send_pus_6_10_checked_raw_memory_data_report when function_state = calculate_checksum_of_the_contents_of_any_readable_part_of_memory_bsw_st then pus_6_10_checked_raw_memory_data_report := true; function_state := send_pus_6_10_checked_raw_memory_data_report_bsw_st]-> SBM;
+    SBM -[send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report when pus_service_reports != pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum and (function_state = receive_pus_TC_6_5_dump_raw_memory_area_service_request_bsw_st or function_state = dump_contents_of_any_readable_part_of_memory_bsw_st or function_state = start_pus_service_request_execution_bsw_st) then pus_TM_1_4_Failed_Start_of_Execution_Verification_Report := true; function_state := send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_bsw_st]-> SBM;
+    SBM -[autonomous_mode_transition_to_configuration_mode when stay_in_BM_flag = false then function_state := autonomous_mode_transition_to_configuration_mode_bsw_st]-> SBM;
+    SBM -[receive_stay_in_BM_command then function_state := receive_stay_in_BM_command_bsw_st]-> SBM;
+    SBM -[receive_mode_transition_command_to_BM then function_state := receive_mode_transition_command_to_BM_bsw_st]-> SBM;
+    BM -[set_cease_refresh_hardware_watchdog_in when function_state = ingest_uncorrectable_EDAC_error_failure_bsw_st then cease_refresh_hardware_watchdog := true; function_state := set_cease_refresh_hardware_watchdog_bsw_st]-> BM;
+    BM -[set_cease_refresh_hardware_watchdog when function_state = ingest_uncorrectable_EDAC_error_failure_bsw_st then cease_refresh_hardware_watchdog := true; function_state := set_cease_refresh_hardware_watchdog_bsw_st]-> BM;
+    BM -[emit_access_NVM_signal when function_state = power_on_NVM_bsw_st or function_state = receive_pus_TC_6_9_check_raw_memory_data_service_request_bsw_st or function_state = receive_pus_TC_6_2_load_raw_memory_data_area_service_request_bsw_st or function_state = receive_pus_TC_open_NVM_sector_for_writing_service_request_bsw_st then access_NVM_signal := true; function_state := emit_access_NVM_signal_bsw_st]-> BM;
+    BM -[write_information_regarding_the_unrecoverable_error_occurrence_into_memory then function_state := write_information_regarding_the_unrecoverable_error_occurrence_into_memory_bsw_st]-> BM;
+    BM -[send_pus_TM_3_25_housekeeping_parameter_report then function_state := send_pus_TM_3_25_housekeeping_parameter_report_bsw_st]-> BM;
+    BM -[enter_BM_in then function_state := enter_BM_bsw_st]-> BM;
+    BM -[enter_BM then function_state := enter_BM_bsw_st]-> BM;
+    BM -[send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report when pus_service_reports != pus_TM_1_2_Failed_Acceptance_Verification_Report_enum and function_state = accept_pus_service_requests_bsw_st then pus_TM_1_2_Failed_Acceptance_Verification_Report := true; function_state := send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report_bsw_st]-> BM;
+    BM -[scrub_any_memory_words_for_which_the_HW_detects_a_correctable_memory_error when function_state = ingest_correctable_EDAC_error_failure_bsw_st then function_state := scrub_any_memory_words_for_which_the_HW_detects_a_correctable_memory_error_bsw_st]-> BM;
+    BM -[set_last_interface_used when function_state = accept_pus_service_requests_bsw_st then function_state := set_last_interface_used_bsw_st]-> BM;
+    BM -[calculate_checksum_of_the_contents_of_any_readable_part_of_memory when function_state = receive_pus_TC_6_9_check_raw_memory_data_service_request_bsw_st then function_state := calculate_checksum_of_the_contents_of_any_readable_part_of_memory_bsw_st]-> BM;
+    BM -[emit_ceasing_watchdog_refresh_interrupt when cease_refresh_hardware_watchdog = true then ceasing_watchdog_refresh_interrupt := true; function_state := emit_ceasing_watchdog_refresh_interrupt_bsw_st]-> BM;
+    BM -[generate_pus_TM_3_25_housekeeping_parameter_report when function_state = receive_mission_specific_pus_housekeeping_parameter_service_request_bsw_st then pus_TM_3_25_housekeeping_parameter_report_with_dedicated_SID := true; function_state := generate_pus_TM_3_25_housekeeping_parameter_report_bsw_st]-> BM;
+    BM -[accept_pus_service_requests then function_state := accept_pus_service_requests_bsw_st]-> BM;
+    BM -[send_pus_TM_6_6_dumped_raw_memory_data_report when function_state = dump_contents_of_any_readable_part_of_memory_bsw_st then pus_TM_6_6_dumped_raw_memory_data_report := true; function_state := send_pus_TM_6_6_dumped_raw_memory_data_report_bsw_st]-> BM;
+    BM -[dump_contents_of_any_readable_part_of_memory when function_state = receive_pus_TC_6_5_dump_raw_memory_area_service_request_bsw_st then function_state := dump_contents_of_any_readable_part_of_memory_bsw_st]-> BM;
+    BM -[receive_mode_transition_command_to_configuration_mode then function_state := receive_mode_transition_command_to_configuration_mode_bsw_st]-> BM;
+    BM -[power_on_NVM when NVM_power_status = false and function_state = autonomous_mode_transition_to_configuration_mode_bsw_st then NVM_power_status := true; function_state := power_on_NVM_bsw_st]-> BM;
+    BM -[send_pus_TM_1_7_successful_completion_of_execution_verification_report when function_state = execute_pus_service_request_bsw_st then pus_TM_1_7_successful_completion_of_execution_verification_report := true; function_state := send_pus_TM_1_7_successful_completion_of_execution_verification_report_bsw_st]-> BM;
+    BM -[set_number_of_memory_cells_with_correctable_errors_HK_data then number_of_memory_cells_with_correctable_errors_HK_data := true; function_state := set_number_of_memory_cells_with_correctable_errors_HK_data_bsw_st]-> BM;
+    SBM -[write_information_regarding_the_unrecoverable_error_occurrence_into_memory then function_state := write_information_regarding_the_unrecoverable_error_occurrence_into_memory_bsw_st]-> SBM;
+    SBM -[send_pus_TM_3_25_housekeeping_parameter_report then function_state := send_pus_TM_3_25_housekeeping_parameter_report_bsw_st]-> SBM;
+    SBM -[set_cease_refresh_hardware_watchdog when function_state = ingest_uncorrectable_EDAC_error_failure_bsw_st then cease_refresh_hardware_watchdog := true; function_state := set_cease_refresh_hardware_watchdog_bsw_st]-> SBM;
+    SBM -[emit_access_NVM_signal when function_state = power_on_NVM_bsw_st or function_state = receive_pus_TC_6_9_check_raw_memory_data_service_request_bsw_st or function_state = receive_pus_TC_6_2_load_raw_memory_data_area_service_request_bsw_st or function_state = receive_pus_TC_open_NVM_sector_for_writing_service_request_bsw_st then access_NVM_signal := true; function_state := emit_access_NVM_signal_bsw_st]-> SBM;
+    SBM -[set_last_interface_used when function_state = accept_pus_service_requests_bsw_st then function_state := set_last_interface_used_bsw_st]-> SBM;
+    SBM -[set_cease_refresh_hardware_watchdog_in when function_state = ingest_uncorrectable_EDAC_error_failure_bsw_st then cease_refresh_hardware_watchdog := true; function_state := set_cease_refresh_hardware_watchdog_bsw_st]-> SBM;
+    SBM -[ingest_uncorrectable_EDAC_error_failure then function_state := ingest_uncorrectable_EDAC_error_failure_bsw_st]-> SBM;
+    SBM -[scrub_any_memory_words_for_which_the_HW_detects_a_correctable_memory_error when function_state = ingest_correctable_EDAC_error_failure_bsw_st then function_state := scrub_any_memory_words_for_which_the_HW_detects_a_correctable_memory_error_bsw_st]-> SBM;
+    SBM -[set_boot_report when function_state = copy_ASW_image_in_NVM_to_RAM_bsw_st then Boot_Report := true; function_state := set_boot_report_bsw_st]-> SBM;
+    BM -[autonomous_mode_transition_to_configuration_mode when stay_in_BM_flag = false then function_state := autonomous_mode_transition_to_configuration_mode_bsw_st]-> SBM;
+    failed -[send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report when pus_service_reports = pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum and (function_state = receive_pus_TC_6_5_dump_raw_memory_area_service_request_bsw_st or function_state = dump_contents_of_any_readable_part_of_memory_bsw_st or function_state = start_pus_service_request_execution_bsw_st) then pus_TM_1_4_Failed_Start_of_Execution_Verification_Report := true; function_state := send_1_pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_bsw_st]-> failed;
+    SBM -[set_number_of_memory_cells_with_correctable_errors_HK_data then number_of_memory_cells_with_correctable_errors_HK_data := true; function_state := set_number_of_memory_cells_with_correctable_errors_HK_data_bsw_st]-> SBM;
+    SBM -[calculate_checksum_of_the_contents_of_any_readable_part_of_memory when function_state = receive_pus_TC_6_9_check_raw_memory_data_service_request_bsw_st then function_state := calculate_checksum_of_the_contents_of_any_readable_part_of_memory_bsw_st]-> SBM;
+    SBM -[power_on_NVM when NVM_power_status = false and function_state = autonomous_mode_transition_to_configuration_mode_bsw_st then NVM_power_status := true; function_state := power_on_NVM_bsw_st]-> SBM;
+    SBM -[send_pus_TM_1_7_successful_completion_of_execution_verification_report when function_state = execute_pus_service_request_bsw_st then pus_TM_1_7_successful_completion_of_execution_verification_report := true; function_state := send_pus_TM_1_7_successful_completion_of_execution_verification_report_bsw_st]-> SBM;
+    SBM -[dump_contents_of_any_readable_part_of_memory when function_state = receive_pus_TC_6_5_dump_raw_memory_area_service_request_bsw_st then function_state := dump_contents_of_any_readable_part_of_memory_bsw_st]-> SBM;
+    SBM -[receive_mode_transition_command_to_configuration_mode then function_state := receive_mode_transition_command_to_configuration_mode_bsw_st]-> SBM;
+    SBM -[accept_pus_service_requests then function_state := accept_pus_service_requests_bsw_st]-> SBM;
+    SBM -[send_pus_TM_6_6_dumped_raw_memory_data_report when function_state = dump_contents_of_any_readable_part_of_memory_bsw_st then pus_TM_6_6_dumped_raw_memory_data_report := true; function_state := send_pus_TM_6_6_dumped_raw_memory_data_report_bsw_st]-> SBM;
+    SBM -[emit_ceasing_watchdog_refresh_interrupt when cease_refresh_hardware_watchdog = true then ceasing_watchdog_refresh_interrupt := true; function_state := emit_ceasing_watchdog_refresh_interrupt_bsw_st]-> SBM;
+    SBM -[send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report when pus_service_reports != pus_TM_1_2_Failed_Acceptance_Verification_Report_enum and function_state = accept_pus_service_requests_bsw_st then pus_TM_1_2_Failed_Acceptance_Verification_Report := true; function_state := send_1_pus_TM_1_2_Failed_Acceptance_Verification_Report_bsw_st]-> SBM;
+    BM -[ingest_uncorrectable_EDAC_error_failure then function_state := ingest_uncorrectable_EDAC_error_failure_bsw_st]-> BM;
+    SBM -[start_pus_service_request_execution when pus_service_reports = pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum and function_state = accept_pus_service_requests_bsw_st then pre_failed_state := SBM_bsw_st; function_state := start_pus_service_request_execution_bsw_st]-> failed;
+properties
+    ErrorModel => classifier (BSW_Error.Impl);
+    FaultEffects => ([ State => "failed_start"; Target => reference (pus_service_reports); Effect => "pus_TM_1_4_Failed_Start_of_Execution_Verification_Report_enum"; ],[ State => "failed_execution"; Target => reference (pus_service_reports); Effect => "pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report_enum"; ],[ State => "failed_acceptance"; Target => reference (pus_service_reports); Effect => "pus_TM_1_2_Failed_Acceptance_Verification_Report_enum"; ]);
+    FDIR => true;
+    GenericProperties => ([ Name => "error"; Formula => "mode=mode:failed"; ],[ Name => "TM generated"; Formula => "pus_TM_1_2_Failed_Acceptance_Verification_Report = true or pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report = true or  pus_TM_1_4_Failed_Start_of_Execution_Verification_Report = true"; ],[ Name => "normal operation"; Formula => "mode = mode:BM or mode=mode:SBM"; ]);
+end BSW.Impl;
+
+system implementation starTracker.Impl
+subcomponents
+    sram: system SRAM.Impl;
+    bsw: system BSW.Impl;
+    cpu: system CPU.Impl;
+connections
+    port bsw.pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report -> pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report;
+    port bsw.pus_TM_1_2_Failed_Acceptance_Verification_Report -> pus_TM_1_2_Failed_Acceptance_Verification_Report;
+    port bsw.pus_TM_1_4_Failed_Start_of_Execution_Verification_Report -> pus_TM_1_4_Failed_Start_of_Execution_Verification_Report;
+    port sram.correctable_EDAC_error_failure -> bsw.correctable_EDAC_error_failure;
+    port sram.uncorrectable_EDAC_error_failure -> bsw.uncorrectable_EDAC_error_failure;
+    port bsw.ceasing_watchdog_refresh_interrupt -> cpu.ceasing_watchdog_refresh_interrupt;
+properties
+    GenericProperties => ([ Name => "Observe pus_TM_1_2_Failed_Acceptance_Verification_Report"; Formula => "pus_TM_1_2_Failed_Acceptance_Verification_Report"; ],[ Name => "Observe pus_TM_1_4_Failed_Start_of_Execution_Verification_Report"; Formula => "pus_TM_1_4_Failed_Start_of_Execution_Verification_Report"; ],[ Name => "Observe pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report"; Formula => "pus_TM_1_8_Failed_Completion_of_Execution_Verification_Report"; ],[ Name => "bsw_failed_acceptance"; Formula => "always (never(bsw.function_state = enum:execute_pus_service_request_bsw_st) or ( bsw.error=error:failed_execution or always (bsw.function_state = enum:send_pus_TM_1_7_successful_completion_of_execution_verification_report_bsw_st)))"; ],[ Name => "As soon as BSW performs execute_pus_service_request and unless BSW is in failed_execution, BSW shall send 1 pus_TM_1_7_successful_completion_of_execution_verification_report"; Formula => "always (
+    	never(bsw.error=error:failed_execution) and 
+    		bsw.function_state = enum:execute_pus_service_request_bsw_st
+    	implies in the future(bsw.function_state = enum:send_pus_TM_1_7_successful_completion_of_execution_verification_report_bsw_st)
+    )"; ]);
+end starTracker.Impl;
+
+system implementation SRAM.Impl
+states
+    failed : state;
+    init : initial state;
+transitions
+    init -[emits_uncorrectable_EDAC_error_failure when uncorrectable_EDAC_error_failure then function_state := emits_uncorrectable_EDAC_error_failure_sram_st]-> failed;
+properties
+    ErrorModel => classifier (SRAM_Error.Impl);
+    FaultEffects => ([ State => "uncorrectable_EDAC_error"; Target => reference (uncorrectable_EDAC_error_failure); Effect => "true"; ]);
+    GenericProperties => ([ Name => "error"; Formula => "mode=mode:failed"; ]);
+end SRAM.Impl;
+
+system implementation CPU.Impl
+end CPU.Impl;
+
+system implementation spacecraft.Impl
+subcomponents
+    startracker: system starTracker.Impl;
+end spacecraft.Impl;
+
+error model SRAM_Error
+features
+    uncorrectable_EDAC_error: error state;
+    no_error: initial state;
+end SRAM_Error;
+
+error model BSW_Error
+features
+    no_error: initial state;
+    failed_execution: error state;
+    failed_acceptance: error state;
+    failed_start: error state;
+end BSW_Error;
+
+error model implementation BSW_Error.Impl
+events
+    failed_execution_FM: error event ;
+    failed_start_FM: error event ;
+    failed_acceptance_FM: error event ;
+transitions
+    no_error-[failed_acceptance_FM]->failed_acceptance;
+    no_error-[failed_start_FM]->failed_start;
+    no_error-[failed_execution_FM]->failed_execution;
+    failed_start-[reset]->no_error;
+    failed_acceptance-[reset]->no_error;
+    failed_execution-[reset]->no_error;
+end BSW_Error.Impl;
+
+error model implementation SRAM_Error.Impl
+events
+    uncorrectable_memory_error: error event ;
+transitions
+    no_error-[uncorrectable_memory_error]->uncorrectable_EDAC_error;
+    uncorrectable_EDAC_error-[reset]->no_error;
+end SRAM_Error.Impl;
